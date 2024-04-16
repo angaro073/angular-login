@@ -1,0 +1,67 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <h2>Sign Up</h2>
+
+    <mat-form-field class="email-input">
+      <mat-label>Username</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="username"
+      >
+      <!-- username errors -->
+        @if(form.get('username')?.hasError('required')) {
+          <mat-error>username is required</mat-error>
+        }
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+        type="email"
+        matInput
+        formControlName="email"
+      >
+      <!-- email error -->
+        @if(form.get('email')?.errors) {
+          <mat-error>
+            @if(form.get('email')?.hasError('email')) {email is invalid}
+            @else if(form.get('email')?.hasError('required')) {email is required}
+          </mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+      <!-- hintLabel="Min {{ minlength }} characters" -->
+      <mat-label>Password</mat-label>
+      <input
+        #password
+        type="password"
+        matInput
+        formControlName="password"
+      >
+      <mat-hint align="end">{{password.value.length}}/{{ minlength }}</mat-hint>
+      <!-- password errors -->
+        @if(form.get('password')?.hasError('required')) {
+          <mat-error>password is required</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input
+        type="password"
+        matInput
+        formControlName="passwordConfirm"
+      >
+      <!-- password confirm errors -->
+        @if(form.hasError('unconfirmed')) {
+          <mat-error>confirm password is required</mat-error>
+        }
+    </mat-form-field>
+
+    <button mat-raised-button>Sign Up</button>
+
+</form>
