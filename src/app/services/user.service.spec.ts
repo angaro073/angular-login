@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { UserService } from './user.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, TestRequest } from '@angular/common/http/testing';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { Roles, User } from '../user';
 
 describe('UserService', () => {
 	let userService: UserService;
 	let httpTestController: HttpTestingController;
+	let mockRequest: TestRequest;
+	let mockUser: User;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
@@ -34,7 +36,7 @@ describe('UserService', () => {
 	*/
 	it('should return every user', () => {
 		let mockUserArray: User[] = [];
-		let mockResponse: User[] = [
+		let mockUsersToReturn: User[] = [
 			{
 				id: 1,
 				username: "peter1234",
@@ -59,13 +61,12 @@ describe('UserService', () => {
 			mockUserArray = users;
 		});
 
-		let mockRequest = httpTestController.expectOne(userService.apiURL);
-		mockRequest.flush(mockResponse);
-		expect(mockUserArray).toEqual(mockResponse);
+		mockRequest = httpTestController.expectOne(userService.apiURL);
+		mockRequest.flush(mockUsersToReturn);
+		expect(mockUserArray).toEqual(mockUsersToReturn);
 	});
 
 	it('should create a new user', () => {
-		let mockUser: User;
 		let mockUserToCreate: User = {
 			id: 2,
 			username: "paul7777",
@@ -75,18 +76,18 @@ describe('UserService', () => {
 			token: "BTOKEN",
 			rol: Roles.Staff
 		};
-		
+
 		userService.createUser(mockUserToCreate).subscribe((newUser) => {
 			mockUser = newUser;
 		});
-		let mockRequest = httpTestController.expectOne(userService.apiURL);
+
+		mockRequest = httpTestController.expectOne(userService.apiURL);
 		mockRequest.flush(mockUserToCreate);
 		expect(mockUser!).toEqual(mockUserToCreate);
 	});
 
 	it('should return a user by id', () => {
-		let mockUser: User;
-		let mockResponse: User = {
+		let mockUserToReturn: User = {
 			id: 2,
 			username: "paul7777",
 			firstName: "Paul",
@@ -95,83 +96,84 @@ describe('UserService', () => {
 			token: "BTOKEN",
 			rol: Roles.Staff
 		};
-		
-		let userId = mockResponse.id;
+
+		let userId = mockUserToReturn.id;
 
 		userService.getUserById(userId).subscribe((user) => {
 			mockUser = user;
 		});
-		
-		let mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
-		mockRequest.flush(mockResponse);
-		expect(mockUser!).toEqual(mockResponse);
+
+		mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
+		mockRequest.flush(mockUserToReturn);
+		expect(mockUser!).toEqual(mockUserToReturn);
 	});
 
 	it('should update existing user', () => {
-		let mockUser: User = {
+		mockUser = {
 			id: 2,
-			username: "paul1234",
+			username: "paul7777",
 			firstName: "Paul",
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
 			rol: Roles.Staff
 		};
+		let mockUpdatedUser = { ...mockUser, username: "paul1234", email: "paul7777@gmail.com", rol: Roles.Administrator };
+
 		let userId = mockUser.id;
-		let mockUpdatedUser = {...mockUser, username: "paul7777", email: "paul7777@gmail.com", rol: Roles.Administrator}
 
 		mockUser.username = "paul7777";
 		mockUser.rol = Roles.Administrator;
 		mockUser.email = "paul7777@gmail.com";
-		
+
 		userService.updateUserData(userId, mockUser).subscribe((updatedUser) => {
-			if(JSON.stringify(mockUser) !== JSON.stringify(updatedUser))
-				fail(`Expected ${JSON.stringify(mockUser)} to equal ${JSON.stringify(updatedUser)}`);
 			mockUser = updatedUser;
 		});
 
-		let mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
+		mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
 		mockRequest.flush(mockUpdatedUser);
-		expect(mockUser.id).toEqual(mockUpdatedUser.id);
+		expect(mockUser).toEqual(mockUpdatedUser);
 	});
 
 	it('should delete existing user', () => {
-		let mockUser: User;
 		let mockUserToDelete: User = {
 			id: 2,
-			username: "paul1234",
+			username: "paul7777",
 			firstName: "Paul",
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
 			rol: Roles.Staff
 		};
+
 		let userId = mockUserToDelete.id;
+
 		userService.deleteUser(userId).subscribe((deletedUser) => {
 			mockUser = deletedUser;
 		});
 
-		let mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
+		mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
 		mockRequest.flush(mockUserToDelete);
 		expect(mockUser!).toEqual(mockUserToDelete);
 	});
 
 	it('should get user profile', () => {
-		let mockUser: User;
-		let mockResponse: User = {
+		let mockUserToReturn: User = {
 			id: 2,
-			username: "paul1234",
+			username: "paul7777",
 			firstName: "Paul",
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
 			rol: Roles.Staff
 		};
-		userService.getUserProfile(mockResponse.token).subscribe((user) => {
+
+		userService.getUserProfile(mockUserToReturn.token).subscribe((user) => {
 			mockUser = user;
 		});
-		let mockRequest = httpTestController.expectOne(`${userService.apiURL}/profile`);
-		mockRequest.flush(mockResponse);
-		expect(mockUser!).toEqual(mockResponse);
+
+		mockRequest = httpTestController.expectOne(`${userService.apiURL}/profile`);
+		mockRequest.flush(mockUserToReturn);
+		expect(mockUser!).toEqual(mockUserToReturn);
 	});
 });
