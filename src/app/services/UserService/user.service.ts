@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../user';
+import { User } from './interfaces';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -35,4 +35,6 @@ export class UserService {
 	getUserProfile(userToken: string): Observable<User> {
 		return this.httpClient.post<User>(`${this.apiURL}/profile`, userToken);
 	}
+
+	
 }

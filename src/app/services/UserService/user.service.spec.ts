@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
 import { HttpClientTestingModule, TestRequest } from '@angular/common/http/testing';
 import { HttpTestingController } from '@angular/common/http/testing';
-import { Roles, User } from '../user';
+import { Roles, User } from './interfaces';
 
 describe('UserService', () => {
 	let userService: UserService;
