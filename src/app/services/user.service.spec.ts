@@ -27,13 +27,6 @@ describe('UserService', () => {
 		expect(userService).toBeTruthy();
 	});
 
-	/* 
-	* Create a new user. || RESPONSE SCHEMA: User (200), {"username": string, "firstName": string, "lastName": string, "email": string, "password": string}}
-	* Return a user by its id. || RESPONSE SCHEMA: 
-	* Update an existing user. || RESPONSE SCHEMA: 
-	* Delete an existing user. || RESPONSE SCHEMA: 
-	* Get user profile. || RESPONSE SCHEMA: 
-	*/
 	it('should return every user', () => {
 		let mockUserArray: User[] = [];
 		let mockUsersToReturn: User[] = [
