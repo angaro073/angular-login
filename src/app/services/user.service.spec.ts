@@ -136,5 +136,23 @@ describe('UserService', () => {
 		mockRequest.flush(mockUserToDelete);
 		expect(mockUser!).toEqual(mockUserToDelete);
 	});
-	it('should get user profile');
+
+	it('should get user profile', () => {
+		let mockUser: User;
+		let mockResponse: User = {
+			id: 2,
+			username: "paul1234",
+			firstName: "Paul",
+			lastName: "Robinson",
+			email: "paul7777@hotmail.com",
+			token: "BTOKEN",
+			rol: Roles.Staff
+		};
+		userService.getUserProfile(mockResponse.token).subscribe((user) => {
+			mockUser = user;
+		});
+		let mockRequest = httpTestController.expectOne(`${userService.apiURL}/profile`);
+		mockRequest.flush(mockResponse);
+		expect(mockUser!).toEqual(mockResponse);
+	});
 });

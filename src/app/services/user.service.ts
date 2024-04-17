@@ -27,4 +27,8 @@ export class UserService {
 	deleteUser(userId: number): Observable<User> {
 		return this.httpClient.delete<User>(`${this.apiURL}/${userId}`);
 	}
+
+	getUserProfile(userToken: string): Observable<User> {
+		return this.httpClient.post<User>(`${this.apiURL}/profile`, userToken);
+	}
 }
