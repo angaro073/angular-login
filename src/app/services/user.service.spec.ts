@@ -87,7 +87,7 @@ describe('UserService', () => {
 		mockRequest.flush(mockResponse);
 		expect(mockUser!).toEqual(mockResponse);
 	});
-	
+
 	it('should update existing user', () => {
 		let mockUser: User = {
 			id: 2,
@@ -115,6 +115,26 @@ describe('UserService', () => {
 		mockRequest.flush(mockUpdatedUser);
 		expect(mockUser.id).toEqual(mockUpdatedUser.id);
 	});
-	it('should delete existing user')
-	it('should get user profile')
+
+	it('should delete existing user', () => {
+		let mockUser: User;
+		let mockUserToDelete: User = {
+			id: 2,
+			username: "paul1234",
+			firstName: "Paul",
+			lastName: "Robinson",
+			email: "paul7777@hotmail.com",
+			token: "BTOKEN",
+			rol: Roles.Staff
+		};
+		let userId = mockUserToDelete.id;
+		userService.deleteUser(userId).subscribe((deletedUser) => {
+			mockUser = deletedUser;
+		});
+
+		let mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
+		mockRequest.flush(mockUserToDelete);
+		expect(mockUser!).toEqual(mockUserToDelete);
+	});
+	it('should get user profile');
 });
