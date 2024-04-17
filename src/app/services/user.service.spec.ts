@@ -86,8 +86,35 @@ describe('UserService', () => {
 		let mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
 		mockRequest.flush(mockResponse);
 		expect(mockUser!).toEqual(mockResponse);
-	})
-	it('should update existing user')
+	});
+	
+	it('should update existing user', () => {
+		let mockUser: User = {
+			id: 2,
+			username: "paul1234",
+			firstName: "Paul",
+			lastName: "Robinson",
+			email: "paul7777@hotmail.com",
+			token: "BTOKEN",
+			rol: Roles.Staff
+		};
+		let userId = mockUser.id;
+		let mockUpdatedUser = {...mockUser, username: "paul7777", email: "paul7777@gmail.com", rol: Roles.Administrator}
+
+		mockUser.username = "paul7777";
+		mockUser.rol = Roles.Administrator;
+		mockUser.email = "paul7777@gmail.com";
+		
+		userService.updateUserData(userId, mockUser).subscribe((updatedUser) => {
+			if(JSON.stringify(mockUser) !== JSON.stringify(updatedUser))
+				fail(`Expected ${JSON.stringify(mockUser)} to equal ${JSON.stringify(updatedUser)}`);
+			mockUser = updatedUser;
+		});
+
+		let mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
+		mockRequest.flush(mockUpdatedUser);
+		expect(mockUser.id).toEqual(mockUpdatedUser.id);
+	});
 	it('should delete existing user')
 	it('should get user profile')
 });
