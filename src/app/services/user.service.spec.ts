@@ -64,7 +64,26 @@ describe('UserService', () => {
 		expect(mockUserArray).toEqual(mockResponse);
 	});
 
-	it('should create a new user')
+	it('should create a new user', () => {
+		let mockUser: User;
+		let mockUserToCreate: User = {
+			id: 2,
+			username: "paul7777",
+			firstName: "Paul",
+			lastName: "Robinson",
+			email: "paul7777@hotmail.com",
+			token: "BTOKEN",
+			rol: Roles.Staff
+		};
+		
+		userService.createUser(mockUserToCreate).subscribe((newUser) => {
+			mockUser = newUser;
+		});
+		let mockRequest = httpTestController.expectOne(userService.apiURL);
+		mockRequest.flush(mockUserToCreate);
+		expect(mockUser!).toEqual(mockUserToCreate);
+	});
+
 	it('should return a user by id', () => {
 		let mockUser: User;
 		let mockResponse: User = {
