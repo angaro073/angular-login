@@ -29,7 +29,7 @@ describe('AuthService', () => {
   });
 
 	it('should register a new user', () => {
-		let mockUserToRegister: UserRegisterData = {
+		let mockUserData: UserRegisterData = {
 			username: "paul7777",
 			firstName: "Paul",
 			lastName: "Robinson",
@@ -47,7 +47,7 @@ describe('AuthService', () => {
 			rol: Roles.User
 		};
 
-		authService.registerUser(mockUserToRegister).subscribe((response) => {
+		authService.registerUser(mockUserData).subscribe((response) => {
 			mockUser = response.user;
 		});
 
@@ -61,7 +61,7 @@ describe('AuthService', () => {
 	});
 
 	it('should log in an existing user', () => {
-		let mockUserToLog: UserLoginData = {
+		let mockUserData: UserLoginData = {
 			email: "paul7777@hotmail.com",
 			password: "1234"
 		};
@@ -76,7 +76,7 @@ describe('AuthService', () => {
 			rol: Roles.User
 		};
 
-		authService.logInUser(mockUserToLog).subscribe((response) => {
+		authService.logInUser(mockUserData).subscribe((response) => {
 			mockUser = response.user;
 		});
 
