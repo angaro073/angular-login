@@ -56,7 +56,7 @@ describe('AuthService', () => {
 		mockRequest.flush({
 			user: mockRegisteredUser,
 			success: true,
-			message: "Register correctly"
+			message: "Registered correctly"
 		});
 		expect(mockUser).toEqual(mockRegisteredUser);
 	});
@@ -117,7 +117,7 @@ describe('AuthService', () => {
 		mockRequest.flush({
 			user: mockUpdatedUser,
 			success: true,
-			message: "Password updated correctly"
+			message: "Password changed correctly"
 		});
 		expect(mockUser).toEqual(mockUpdatedUser);
 	});
@@ -146,7 +146,7 @@ describe('AuthService', () => {
 		mockRequest.flush({
 			user: mockLoggedOutUser,
 			success: true,
-			message: "User logged out correctly"
+			message: "Logged out correctly"
 		});
 		expect(mockUser).toEqual(mockLoggedOutUser);		
 	});
@@ -176,7 +176,7 @@ describe('AuthService', () => {
 		mockRequest.flush({
 			user: mockSignedOutUser,
 			success: true,
-			message: "User signed out correctly"
+			message: "Account successfully deleted"
 		});
 		expect(mockUser).toEqual(mockSignedOutUser);	
 	});
