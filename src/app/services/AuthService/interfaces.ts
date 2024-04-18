@@ -19,10 +19,6 @@ export interface ForgotPasswordData {
 	newPassword: string
 }
 
-export interface Token {
-	token: string
-}
-
 export interface UserSignoutData {
 	token: string,
 	password: string

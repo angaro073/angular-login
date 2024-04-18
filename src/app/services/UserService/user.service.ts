@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from './interfaces';
 import { HttpClient } from '@angular/common/http';
-
+import { Token } from './interfaces';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +32,7 @@ export class UserService {
 		return this.httpClient.delete<User>(`${this.apiURL}/${userId}`);
 	}
 
-	getUserProfile(userToken: string): Observable<User> {
+	getUserProfile(userToken: Token): Observable<User> {
 		return this.httpClient.post<User>(`${this.apiURL}/profile`, userToken);
 	}
 

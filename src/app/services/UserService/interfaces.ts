@@ -13,3 +13,7 @@ export enum Roles {
 	Staff = "STAFF",
 	User = "USER"
 }
+
+export interface Token {
+	token: string
+}

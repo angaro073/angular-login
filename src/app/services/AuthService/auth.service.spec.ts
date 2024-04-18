@@ -3,8 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import { HttpClientTestingModule, TestRequest, } from '@angular/common/http/testing';
 import { HttpTestingController } from '@angular/common/http/testing';
-import { User, Roles } from '../UserService/interfaces';
-import { ForgotPasswordData, UserLoginData, UserRegisterData, Token, UserSignoutData } from './interfaces';
+import { User, Token, Roles } from '../UserService/interfaces';
+import { ForgotPasswordData, UserLoginData, UserRegisterData, UserSignoutData } from './interfaces';
 
 describe('AuthService', () => {
   let authService: AuthService;

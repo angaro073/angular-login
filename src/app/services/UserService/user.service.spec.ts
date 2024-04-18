@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { UserService } from './user.service';
 import { HttpClientTestingModule, TestRequest } from '@angular/common/http/testing';
 import { HttpTestingController } from '@angular/common/http/testing';
-import { Roles, User } from './interfaces';
+import { Roles, Token, User } from './interfaces';
 
 describe('UserService', () => {
 	let userService: UserService;
@@ -166,7 +166,11 @@ describe('UserService', () => {
 			rol: Roles.Staff
 		};
 
-		userService.getUserProfile(mockUserToReturn.token).subscribe((user) => {
+		let userToken: Token = {
+			token: mockUserToReturn.token
+		}
+
+		userService.getUserProfile(userToken).subscribe((user) => {
 			mockUser = user;
 		});
 

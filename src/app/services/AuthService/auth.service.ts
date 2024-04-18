@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserRegisterData, AuthResponse, UserLoginData, ForgotPasswordData, Token, UserSignoutData } from './interfaces';
+import { UserRegisterData, AuthResponse, UserLoginData, ForgotPasswordData, UserSignoutData } from './interfaces';
 import { HttpClient } from '@angular/common/http';
+import { Token } from '../UserService/interfaces';
 
 @Injectable({
   providedIn: 'root'
