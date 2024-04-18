@@ -19,6 +19,10 @@ export interface ForgotPasswordData {
 	newPassword: string
 }
 
+export interface Token {
+	token: string
+}
+
 export interface AuthResponse {
 	user: User,
 	success: boolean,

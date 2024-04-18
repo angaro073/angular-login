@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { HttpClientTestingModule, TestRequest, } from '@angular/common/http/testing';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { User, Roles } from '../UserService/interfaces';
-import { ForgotPasswordData, UserLoginData, UserRegisterData } from './interfaces';
+import { ForgotPasswordData, UserLoginData, UserRegisterData, Token } from './interfaces';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -119,6 +119,33 @@ describe('AuthService', () => {
 		expect(mockUser).toEqual(mockUpdatedUser);
 	});
 	
-	it('should log out currently logged user')
+	it('should log out currently logged user', () => {
+		let mockUserData: Token = {
+			token: "BTOKEN"
+		};
+
+		let mockLoggedOutUser: User = {
+			id: 1,
+			username: "paul7777",
+			firstName: "Paul",
+			lastName: "Robinson",
+			email: "paul7777@hotmail.com",
+			token: "BTOKEN",
+			rol: Roles.User
+		};
+
+		authService.logOutUser(mockUserData).subscribe((response) => {
+			mockUser = response.user;
+		}); 
+
+		mockRequest = httpTestController.expectOne(`${authService.apiURL}/logout`);
+		mockRequest.flush({
+			user: mockLoggedOutUser,
+			success: true,
+			message: "User logged out correctly"
+		});
+		expect(mockUser).toEqual(mockLoggedOutUser);		
+	});
+	
 	it('should sign out currently logged user')
 });
