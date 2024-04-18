@@ -1,6 +1,6 @@
 import { User } from "../UserService/interfaces";
 
-export interface UserCreationData {
+export interface UserRegisterData {
 	username: string,
 	firstName: string,
 	lastName: string,
@@ -8,7 +8,12 @@ export interface UserCreationData {
 	password: string
 }
 
-export interface UserCreationResponse {
+export interface UserLoginData {
+	email: string,
+	password: string
+}
+
+export interface AuthResponse {
 	user: User,
 	success: boolean,
 	message: string
