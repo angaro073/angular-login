@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { HttpClientTestingModule, TestRequest, } from '@angular/common/http/testing';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { User, Roles } from '../UserService/interfaces';
-import { CreateUser } from './interfaces';
+import { UserCreationData } from './interfaces';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -29,7 +29,7 @@ describe('AuthService', () => {
   });
 
 	it('should register a new user', () => {
-		let mockUserToRegister: CreateUser = {
+		let mockUserToRegister: UserCreationData = {
 			username: "paul7777",
 			firstName: "Paul",
 			lastName: "Robinson",
@@ -37,7 +37,7 @@ describe('AuthService', () => {
 			password: "1234"
 		};
 		
-		let generatedUser: User = {
+		let mockRegisteredUser: User = {
 			id: 1,
 			username: "paul7777",
 			firstName: "Paul",
@@ -47,13 +47,19 @@ describe('AuthService', () => {
 			rol: Roles.User
 		};
 
-		authService.registerUser(mockUserToRegister).subscribe((creationData) => {
-			mockUser = creationData.user;
+		authService.registerUser(mockUserToRegister).subscribe((response) => {
+			mockUser = response.user;
 		});
 
-		mockRequest = httpTestController.expectOne(`${authService.apiURL}/users`);
-		
+		mockRequest = httpTestController.expectOne(`${authService.apiURL}/signup`);
+		mockRequest.flush({
+			user: mockRegisteredUser,
+			success: true,
+			message: "Register correctly"
+		});
+		expect(mockUser).toEqual(mockRegisteredUser);
 	});
+
 	it('should log in an existing user');
 	it('should reset a user password');
 	it('should log out currently logged user')
