@@ -55,6 +55,7 @@ describe('UserService', () => {
 		});
 
 		mockRequest = httpTestController.expectOne(userService.apiURL);
+		expect(mockRequest.request.method).toEqual("GET");
 		mockRequest.flush(mockUsersToReturn);
 		expect(mockUserArray).toEqual(mockUsersToReturn);
 	});
@@ -75,6 +76,7 @@ describe('UserService', () => {
 		});
 
 		mockRequest = httpTestController.expectOne(userService.apiURL);
+		expect(mockRequest.request.method).toEqual("POST");
 		mockRequest.flush(mockUserToCreate);
 		expect(mockUser!).toEqual(mockUserToCreate);
 	});
@@ -97,6 +99,7 @@ describe('UserService', () => {
 		});
 
 		mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
+		expect(mockRequest.request.method).toEqual("GET");
 		mockRequest.flush(mockUserToReturn);
 		expect(mockUser!).toEqual(mockUserToReturn);
 	});
@@ -124,6 +127,7 @@ describe('UserService', () => {
 		});
 
 		mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
+		expect(mockRequest.request.method).toEqual("PUT");
 		mockRequest.flush(mockUpdatedUser);
 		expect(mockUser).toEqual(mockUpdatedUser);
 	});
@@ -146,6 +150,7 @@ describe('UserService', () => {
 		});
 
 		mockRequest = httpTestController.expectOne(`${userService.apiURL}/${userId}`);
+		expect(mockRequest.request.method).toEqual("DELETE");
 		mockRequest.flush(mockUserToDelete);
 		expect(mockUser!).toEqual(mockUserToDelete);
 	});
@@ -166,6 +171,7 @@ describe('UserService', () => {
 		});
 
 		mockRequest = httpTestController.expectOne(`${userService.apiURL}/profile`);
+		expect(mockRequest.request.method).toEqual("POST");
 		mockRequest.flush(mockUserToReturn);
 		expect(mockUser!).toEqual(mockUserToReturn);
 	});

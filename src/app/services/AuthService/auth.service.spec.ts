@@ -52,6 +52,7 @@ describe('AuthService', () => {
 		});
 
 		mockRequest = httpTestController.expectOne(`${authService.apiURL}/signup`);
+		expect(mockRequest.request.method).toEqual("POST");
 		mockRequest.flush({
 			user: mockRegisteredUser,
 			success: true,
@@ -81,6 +82,7 @@ describe('AuthService', () => {
 		});
 
 		mockRequest = httpTestController.expectOne(`${authService.apiURL}/login`);
+		expect(mockRequest.request.method).toEqual("POST");
 		mockRequest.flush({
 			user: mockLoggedUser,
 			success: true,
@@ -111,6 +113,7 @@ describe('AuthService', () => {
 		});
 
 		mockRequest = httpTestController.expectOne(`${authService.apiURL}/forgotpassword`);
+		expect(mockRequest.request.method).toEqual("PUT");
 		mockRequest.flush({
 			user: mockUpdatedUser,
 			success: true,
@@ -139,6 +142,7 @@ describe('AuthService', () => {
 		}); 
 
 		mockRequest = httpTestController.expectOne(`${authService.apiURL}/logout`);
+		expect(mockRequest.request.method).toEqual("POST");
 		mockRequest.flush({
 			user: mockLoggedOutUser,
 			success: true,
@@ -168,6 +172,7 @@ describe('AuthService', () => {
 		})
 		
 		mockRequest = httpTestController.expectOne(`${authService.apiURL}/signout`);
+		expect(mockRequest.request.method).toEqual("POST");
 		mockRequest.flush({
 			user: mockSignedOutUser,
 			success: true,
