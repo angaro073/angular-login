@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { HttpClientTestingModule, TestRequest, } from '@angular/common/http/testing';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { User, Roles } from '../UserService/interfaces';
-import { UserLoginData, UserRegisterData } from './interfaces';
+import { ForgotPasswordData, UserLoginData, UserRegisterData } from './interfaces';
 
 describe('AuthService', () => {
   let authService: AuthService;
@@ -84,12 +84,41 @@ describe('AuthService', () => {
 		mockRequest.flush({
 			user: mockLoggedUser,
 			success: true,
-			message: "Register correctly"
+			message: "Logged correctly"
 		});
 		expect(mockUser).toEqual(mockLoggedUser);
 	});
 	
-	it('should reset a user password');
+	it('should reset a user password', () => {
+		let mockUserData: ForgotPasswordData = {
+			token: "BTOKEN",
+			oldPassword: "1234",
+			newPassword: "5678"
+		};
+
+		let mockUpdatedUser: User = {
+			id: 1,
+			username: "paul7777",
+			firstName: "Paul",
+			lastName: "Robinson",
+			email: "paul7777@hotmail.com",
+			token: "BTOKEN",
+			rol: Roles.User
+		};
+
+		authService.resetPassword(mockUserData).subscribe((response) => {
+			mockUser = response.user;
+		});
+
+		mockRequest = httpTestController.expectOne(`${authService.apiURL}/forgotpassword`);
+		mockRequest.flush({
+			user: mockUpdatedUser,
+			success: true,
+			message: "Password updated correctly"
+		});
+		expect(mockUser).toEqual(mockUpdatedUser);
+	});
+	
 	it('should log out currently logged user')
 	it('should sign out currently logged user')
 });

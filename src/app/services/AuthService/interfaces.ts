@@ -13,6 +13,12 @@ export interface UserLoginData {
 	password: string
 }
 
+export interface ForgotPasswordData {
+	token: string,
+	oldPassword: string,
+	newPassword: string
+}
+
 export interface AuthResponse {
 	user: User,
 	success: boolean,
