@@ -63,32 +63,6 @@ describe('AuthService', () => {
 		expect(mockUser).toEqual(mockRegisteredUser);
 	});
 
-	it('should be able to handle errors when trying to register a new user', () => {
-		let mockUserData: UserRegisterData = {
-			username: "paul7777",
-			firstName: "Paul",
-			lastName: "Robinson",
-			email: "bademail",
-			password: "1234"
-		};
-
-		authService.registerUser(mockUserData).subscribe({
-			next: () => fail("Error thrown"),
-			error: (err: HttpErrorResponse) => httpError = err
-		});
-
-		mockRequest = httpTestController.expectOne(`${authService.apiURL}/signup`);
-		mockRequest.flush('Server error', {
-			status: 400,
-			statusText: 'Bad Request'
-		} as HttpErrorResponse);
-
-		if(!httpError)
-			throw new Error("Errors can't be handled correctly");
-
-		expect(httpError.status).toEqual(400);
-		expect(httpError.statusText).toEqual('Bad Request');
-	});
 
 	it('should log in an existing user', () => {
 		let mockUserData: UserLoginData = {
@@ -120,29 +94,7 @@ describe('AuthService', () => {
 		expect(mockUser).toEqual(mockLoggedUser);
 	});
 
-	it('should be able to handle errors when trying to log in an existing user', () => {
-		let mockUserData: UserLoginData = {
-			email: "bademail",
-			password: "1234"
-		};
-
-		authService.logInUser(mockUserData).subscribe({
-			next: () => fail("Error thrown"),
-			error: (err: HttpErrorResponse) => httpError = err
-		});
-
-		mockRequest = httpTestController.expectOne(`${authService.apiURL}/login`);
-		mockRequest.flush('Server error', {
-			status: 400,
-			statusText: 'Bad Request'
-		} as HttpErrorResponse);
-
-		if(!httpError)
-			throw new Error("Errors can't be handled correctly");
-
-		expect(httpError.status).toEqual(400);
-		expect(httpError.statusText).toEqual('Bad Request');
-	});
+	
 	
 	it('should reset a user password', () => {
 		let mockUserData: ForgotPasswordData = {
@@ -175,29 +127,7 @@ describe('AuthService', () => {
 		expect(mockUser).toEqual(mockUpdatedUser);
 	});
 
-	it('should be able to handle errors when trying to reset a user password', () => {
-		let mockUserData: ForgotPasswordData = {
-			token: "BTOKEN",
-			oldPassword: "1234",
-			newPassword: ""
-		};
-		authService.resetPassword(mockUserData).subscribe({
-			next: () => fail("Error thrown"),
-			error: (err: HttpErrorResponse) => httpError = err
-		});
-
-		mockRequest = httpTestController.expectOne(`${authService.apiURL}/forgotpassword`);
-		mockRequest.flush('Server error', {
-			status: 400,
-			statusText: 'Bad Request'
-		} as HttpErrorResponse);
-
-		if(!httpError)
-			throw new Error("Errors can't be handled correctly");
-
-		expect(httpError.status).toEqual(400);
-		expect(httpError.statusText).toEqual('Bad Request');
-	});
+	
 	
 	it('should log out currently logged user', () => {
 		let mockUserData: Token = {
@@ -228,29 +158,6 @@ describe('AuthService', () => {
 		expect(mockUser).toEqual(mockLoggedOutUser);		
 	});
 
-	it('should be able to handle errors when trying to log out currently logged user', () => {
-		let mockUserData: Token = {
-			token: "BTOKEN"
-		};
-
-		authService.logOutUser(mockUserData).subscribe({
-			next: () => fail("Error thrown"),
-			error: (err: HttpErrorResponse) => httpError = err
-		});
-
-		mockRequest = httpTestController.expectOne(`${authService.apiURL}/logout`);
-		mockRequest.flush('Server error', {
-			status: 400,
-			statusText: 'Bad Request'
-		} as HttpErrorResponse);
-
-		if(!httpError)
-			throw new Error("Errors can't be handled correctly");
-
-		expect(httpError.status).toEqual(400);
-		expect(httpError.statusText).toEqual('Bad Request');
-	});
-	
 	it('should sign out currently logged user', () => {
 		let mockUserData: UserSignoutData = {
 			token: "BTOKEN",
@@ -279,6 +186,104 @@ describe('AuthService', () => {
 			message: "Account successfully deleted"
 		});
 		expect(mockUser).toEqual(mockSignedOutUser);	
+	});
+
+	it('should be able to handle errors when trying to register a new user', () => {
+		let mockUserData: UserRegisterData = {
+			username: "paul7777",
+			firstName: "Paul",
+			lastName: "Robinson",
+			email: "bademail",
+			password: "1234"
+		};
+
+		authService.registerUser(mockUserData).subscribe({
+			next: () => fail("Error thrown"),
+			error: (err: HttpErrorResponse) => httpError = err
+		});
+
+		mockRequest = httpTestController.expectOne(`${authService.apiURL}/signup`);
+		mockRequest.flush('Server error', {
+			status: 400,
+			statusText: 'Bad Request'
+		} as HttpErrorResponse);
+
+		if(!httpError)
+			throw new Error("Errors can't be handled correctly");
+
+		expect(httpError.status).toEqual(400);
+		expect(httpError.statusText).toEqual('Bad Request');
+	});
+
+	it('should be able to handle errors when trying to log in an existing user', () => {
+		let mockUserData: UserLoginData = {
+			email: "bademail",
+			password: "1234"
+		};
+
+		authService.logInUser(mockUserData).subscribe({
+			next: () => fail("Error thrown"),
+			error: (err: HttpErrorResponse) => httpError = err
+		});
+
+		mockRequest = httpTestController.expectOne(`${authService.apiURL}/login`);
+		mockRequest.flush('Server error', {
+			status: 400,
+			statusText: 'Bad Request'
+		} as HttpErrorResponse);
+
+		if(!httpError)
+			throw new Error("Errors can't be handled correctly");
+
+		expect(httpError.status).toEqual(400);
+		expect(httpError.statusText).toEqual('Bad Request');
+	});
+
+	it('should be able to handle errors when trying to reset a user password', () => {
+		let mockUserData: ForgotPasswordData = {
+			token: "BTOKEN",
+			oldPassword: "1234",
+			newPassword: ""
+		};
+		authService.resetPassword(mockUserData).subscribe({
+			next: () => fail("Error thrown"),
+			error: (err: HttpErrorResponse) => httpError = err
+		});
+
+		mockRequest = httpTestController.expectOne(`${authService.apiURL}/forgotpassword`);
+		mockRequest.flush('Server error', {
+			status: 400,
+			statusText: 'Bad Request'
+		} as HttpErrorResponse);
+
+		if(!httpError)
+			throw new Error("Errors can't be handled correctly");
+
+		expect(httpError.status).toEqual(400);
+		expect(httpError.statusText).toEqual('Bad Request');
+	});
+
+	it('should be able to handle errors when trying to log out currently logged user', () => {
+		let mockUserData: Token = {
+			token: "BTOKEN"
+		};
+
+		authService.logOutUser(mockUserData).subscribe({
+			next: () => fail("Error thrown"),
+			error: (err: HttpErrorResponse) => httpError = err
+		});
+
+		mockRequest = httpTestController.expectOne(`${authService.apiURL}/logout`);
+		mockRequest.flush('Server error', {
+			status: 400,
+			statusText: 'Bad Request'
+		} as HttpErrorResponse);
+
+		if(!httpError)
+			throw new Error("Errors can't be handled correctly");
+
+		expect(httpError.status).toEqual(400);
+		expect(httpError.statusText).toEqual('Bad Request');
 	});
 
 	it('should be able to handle errors when trying to sign out currently logged user', () => {
