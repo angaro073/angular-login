@@ -23,6 +23,11 @@ export interface Token {
 	token: string
 }
 
+export interface UserSignoutData {
+	token: string,
+	password: string
+}
+
 export interface AuthResponse {
 	user: User,
 	success: boolean,

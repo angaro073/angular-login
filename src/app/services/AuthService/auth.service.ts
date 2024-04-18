@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserRegisterData, AuthResponse, UserLoginData, ForgotPasswordData, Token } from './interfaces';
+import { UserRegisterData, AuthResponse, UserLoginData, ForgotPasswordData, Token, UserSignoutData } from './interfaces';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -26,5 +26,9 @@ export class AuthService {
 
 	logOutUser(userData: Token): Observable<AuthResponse> {
 		return this.httpClient.post<AuthResponse>(`${this.apiURL}/logout`, userData);
+	}
+
+	signOutUser(userData: UserSignoutData): Observable<AuthResponse> {
+		return this.httpClient.post<AuthResponse>(`${this.apiURL}/signout`, userData);
 	}
 }
