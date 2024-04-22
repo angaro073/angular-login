@@ -48,7 +48,7 @@ describe('UserService', () => {
 				lastName: "Robinson",
 				email: "paul7777@hotmail.com",
 				token: "BTOKEN",
-				rol: Roles.Staff
+				rol: Roles.Writer
 			}
 		];
 
@@ -89,7 +89,7 @@ describe('UserService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.Staff
+			rol: Roles.Writer
 		};
 
 		userService.createUser(mockUserToCreate).subscribe((newUser) => {
@@ -110,7 +110,7 @@ describe('UserService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.Staff
+			rol: Roles.Writer
 		};
 
 		userService.createUser(mockUserToCreate).subscribe({
@@ -139,7 +139,7 @@ describe('UserService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.Staff
+			rol: Roles.Writer
 		};
 
 		let userId = mockUserToReturn.id;
@@ -162,7 +162,7 @@ describe('UserService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.Staff
+			rol: Roles.Writer
 		};
 
 		let userId = mockUserToReturn.id;
@@ -193,7 +193,7 @@ describe('UserService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.Staff
+			rol: Roles.Writer
 		};
 		let mockUpdatedUser = { ...mockUser, username: "paul1234", email: "paul7777@gmail.com", rol: Roles.Administrator };
 
@@ -221,7 +221,7 @@ describe('UserService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.Staff
+			rol: Roles.Writer
 		};
 
 		let userId = mockUser.id;
@@ -256,7 +256,7 @@ describe('UserService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.Staff
+			rol: Roles.Writer
 		};
 
 		let userId = mockUserToDelete.id;
@@ -279,7 +279,7 @@ describe('UserService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.Staff
+			rol: Roles.Writer
 		};
 
 		let userId = mockUserToDelete.id;
@@ -310,7 +310,7 @@ describe('UserService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.Staff
+			rol: Roles.Writer
 		};
 
 		let userToken: Token = {
@@ -335,7 +335,7 @@ describe('UserService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.Staff
+			rol: Roles.Writer
 		};
 
 		let userToken: Token = {

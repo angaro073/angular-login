@@ -10,8 +10,8 @@ export interface User {
 
 export enum Roles {
 	Administrator = "ADMIN",
-	Staff = "STAFF",
-	User = "USER"
+	Writer = "WRITER",
+	Reader = "READER"
 }
 
 export interface Token {

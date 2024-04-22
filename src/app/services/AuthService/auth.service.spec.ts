@@ -46,7 +46,7 @@ describe('AuthService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.User
+			rol: Roles.Reader
 		};
 
 		authService.registerUser(mockUserData).subscribe((response) => {
@@ -77,7 +77,7 @@ describe('AuthService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.User
+			rol: Roles.Reader
 		};
 
 		authService.logInUser(mockUserData).subscribe((response) => {
@@ -110,7 +110,7 @@ describe('AuthService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.User
+			rol: Roles.Reader
 		};
 
 		authService.resetPassword(mockUserData).subscribe((response) => {
@@ -141,7 +141,7 @@ describe('AuthService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.User
+			rol: Roles.Reader
 		};
 
 		authService.logOutUser(mockUserData).subscribe((response) => {
@@ -171,7 +171,7 @@ describe('AuthService', () => {
 			lastName: "Robinson",
 			email: "paul7777@hotmail.com",
 			token: "BTOKEN",
-			rol: Roles.User
+			rol: Roles.Reader
 		};
 
 		authService.signOutUser(mockUserData).subscribe((response) => {
